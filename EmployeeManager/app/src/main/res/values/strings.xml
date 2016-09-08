@@ -1,3 +1,15 @@
 <resources>
 	<string name="app_name">EmployeeManager</string>
+
+	<string-array name="date_format_entries">
+		<item>YYYY-MM-DD</item>
+		<item>MM-DD-YYYY</item>
+		<item>MM-YY</item>
+	</string-array>
+
+	<string-array name="date_format_entry_values">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+	</string-array>
 </resources>

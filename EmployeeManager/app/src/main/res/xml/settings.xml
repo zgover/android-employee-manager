@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<PreferenceCategory
+		android:title="Delete">
+
+		<Preference
+			android:key="DELETE_ALL"
+			android:title="Delete All"
+			android:summary="Delete all employees in the list"/>
+
+	</PreferenceCategory>
+
+	<PreferenceCategory
+		android:title="Display">
+
+		<ListPreference
+			android:key="DATE_FORMAT"
+			android:title="Date Format"
+			android:summary="Select the default date format"
+			android:entries="@array/date_format_entries"
+			android:entryValues="@array/date_format_entry_values"
+			android:defaultValue="0"/>
+
+	</PreferenceCategory>
+
+</PreferenceScreen>

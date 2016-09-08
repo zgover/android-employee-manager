@@ -1,17 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:paddingLeft="@dimen/activity_horizontal_margin"
-	android:paddingRight="@dimen/activity_horizontal_margin"
-	android:paddingTop="@dimen/activity_vertical_margin"
-	android:paddingBottom="@dimen/activity_vertical_margin"
+	android:orientation="vertical"
 	tools:context="com.gover.zachary.employeemanager.MainActivity">
 
-	<TextView
-		android:text="Hello World!"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"/>
-</RelativeLayout>
+	<fragment
+		android:id="@+id/navFragment"
+		android:name="com.gover.zachary.employeemanager.fragments.NavigationFragment"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:visibility="visible"
+		tools:layout="@layout/navigation_fragment"/>
+
+	<fragment
+		android:id="@+id/listFragment"
+		android:name="com.gover.zachary.employeemanager.fragments.ListViewFragment"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:visibility="visible"
+		tools:layout="@layout/list_view_fragment"/>
+
+	<fragment
+		android:id="@+id/detailFragment"
+		android:name="com.gover.zachary.employeemanager.fragments.EmployeeDetailFragment"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:visibility="gone"
+		tools:layout="@layout/employee_detail_fragment"/>
+
+	<fragment
+		android:id="@+id/addEmployeeFragment"
+		android:name="com.gover.zachary.employeemanager.fragments.EmployeeFormFragment"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:visibility="gone"
+		tools:layout="@layout/add_employee_fragment"/>
+
+	<fragment
+		android:id="@+id/settingsFragment"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:visibility="gone"
+		tools:layout="@xml/settings"
+		android:name="com.gover.zachary.employeemanager.fragments.SettingsFragment"/>
+
+</LinearLayout>
