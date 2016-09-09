@@ -19,17 +19,11 @@ public class MainActivity extends AppCompatActivity {
 	 * MARK: Global Properties
 	 */
 
-	public int currentView;
-
 	/**
 	 * MARK: Fragments
 	 */
 
-	public PreferenceFragment settingsFrag;
 	public ListFragment listViewFrag;
-	public Fragment navigationFrag;
-	public Fragment emplDetailFrag;
-	public Fragment emplFormFrag;
 
 	/**
 	 * MARK: Default Methods
@@ -42,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
 		// Setup default properties and connections
 		listViewFrag = ListViewFragment.newInstance();
-		
+
 		FragmentTransaction fragTrans = getFragmentManager().beginTransaction();
 		fragTrans.replace(R.id.frameLayout, listViewFrag);
 		fragTrans.commit();
