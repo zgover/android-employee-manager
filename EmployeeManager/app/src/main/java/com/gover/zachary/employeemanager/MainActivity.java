@@ -23,7 +23,7 @@ import com.gover.zachary.employeemanager.models.Employee;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity implements ListViewFragment.ClickListener, SettingsFragment.SettingsListener{
+public class MainActivity extends AppCompatActivity implements ListViewFragment.ClickListener, SettingsFragment.SettingsListener {
 
 	/**
 	 * MARK: Global Properties
