@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.gover.zachary.employeemanager.fragments.*;
 import com.gover.zachary.employeemanager.models.Database;
+import com.gover.zachary.employeemanager.models.Employee;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -72,6 +73,10 @@ public class MainActivity extends AppCompatActivity {
 		showFrag(EmployeeFormFragment.newInstance());
 	}
 
+	public void openEmployeeDetail(Employee emp) {
+		
+	}
+
 	/**
 	 * MARK: Custom Methods
 	 */
@@ -117,5 +122,21 @@ public class MainActivity extends AppCompatActivity {
 		}
 
 		int empIntNum = Integer.parseInt(empNum);
+
+		// Build out the new employee from the form
+		Employee emp = new Employee();
+		emp.setFirstName(fName);
+		emp.setLastName(lName);
+		emp.setEmployeeNumber(empIntNum);
+		emp.setEmploymentStatus(empStat);
+		emp.setHireDate(hireDate);
+
+		db.addEmployee(emp);
+		adapter.clear();
+		adapter.addAll(db.getEmployees());
+
+		adapter.notifyDataSetChanged();
+
+		getFragmentManager().popBackStack();
 	}
 }
