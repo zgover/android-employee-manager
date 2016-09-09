@@ -44,7 +44,6 @@ public class SettingsFragment extends PreferenceFragment {
 		pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference _pref) {
-				// Do what you want
 				return true;
 			}
 		});

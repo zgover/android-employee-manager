@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
+	android:id="@+id/frameLayout"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
@@ -7,44 +8,6 @@
 	android:orientation="vertical"
 	tools:context="com.gover.zachary.employeemanager.MainActivity">
 
-	<fragment
-		android:id="@+id/navFragment"
-		android:name="com.gover.zachary.employeemanager.fragments.NavigationFragment"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:visibility="visible"
-		tools:layout="@layout/navigation_fragment"/>
 
-	<fragment
-		android:id="@+id/listFragment"
-		android:name="com.gover.zachary.employeemanager.fragments.ListViewFragment"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:visibility="visible"
-		tools:layout="@layout/list_view_fragment"/>
 
-	<fragment
-		android:id="@+id/detailFragment"
-		android:name="com.gover.zachary.employeemanager.fragments.EmployeeDetailFragment"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:visibility="gone"
-		tools:layout="@layout/employee_detail_fragment"/>
-
-	<fragment
-		android:id="@+id/addEmployeeFragment"
-		android:name="com.gover.zachary.employeemanager.fragments.EmployeeFormFragment"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:visibility="gone"
-		tools:layout="@layout/add_employee_fragment"/>
-
-	<fragment
-		android:id="@+id/settingsFragment"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:visibility="gone"
-		tools:layout="@xml/settings"
-		android:name="com.gover.zachary.employeemanager.fragments.SettingsFragment"/>
-
-</LinearLayout>
+</FrameLayout>

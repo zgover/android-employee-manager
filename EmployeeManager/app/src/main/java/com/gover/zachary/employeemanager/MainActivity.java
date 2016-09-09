@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 	 * MARK: Global Properties
 	 */
 
+	public int currentView;
+
 	/**
 	 * MARK: Fragments
 	 */
@@ -39,11 +41,11 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 
 		// Setup default properties and connections
-		settingsFrag = SettingsFragment.newInstance();
 		listViewFrag = ListViewFragment.newInstance();
-		navigationFrag = NavigationFragment.newInstance();
-		emplDetailFrag = EmployeeDetailFragment.newInstance();
-		emplFormFrag = EmployeeFormFragment.newInstance();
+		
+		FragmentTransaction fragTrans = getFragmentManager().beginTransaction();
+		fragTrans.replace(R.id.frameLayout, listViewFrag);
+		fragTrans.commit();
 	}
 
 	/**
@@ -51,11 +53,11 @@ public class MainActivity extends AppCompatActivity {
 	 */
 
 	public void openSettings(View view) {
-		showFrag(settingsFrag);
+		showFrag(SettingsFragment.newInstance());
 	}
 
 	public void openEmployeeForm(View view) {
-		showFrag(emplFormFrag);
+		showFrag(EmployeeFormFragment.newInstance());
 	}
 
 	/**
@@ -64,21 +66,13 @@ public class MainActivity extends AppCompatActivity {
 
 	public void showFrag(Fragment frag) {
 		FragmentTransaction fragTrans = getFragmentManager().beginTransaction();
-		Fragment[] fragments = {
-			settingsFrag, listViewFrag, navigationFrag, emplDetailFrag, emplFormFrag
-		};
 
-		// Loop through all frags and identify which we should show AND hide
-		for(int i = 0; i < fragments.length; i++) {
-			Fragment current = fragments[i];
-
-			if (current.equals(frag)) {
-				fragTrans.show(current);
-			} else {
-				fragTrans.hide(current);
-			}
-		}
+		fragTrans.add(R.id.frameLayout, frag);
+		fragTrans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+		fragTrans.hide(listViewFrag);
+		fragTrans.addToBackStack(listViewFrag.getClass().getName());
 
 		fragTrans.commit();
 	}
+
 }
