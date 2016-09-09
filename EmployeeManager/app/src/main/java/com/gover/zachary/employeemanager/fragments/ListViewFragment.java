@@ -41,8 +41,6 @@ public class ListViewFragment extends ListFragment {
 	 * MARK: Default Methods
 	 */
 
-
-
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);

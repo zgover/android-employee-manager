@@ -5,7 +5,6 @@
 package com.gover.zachary.employeemanager;
 
 import android.app.FragmentTransaction;
-import android.preference.PreferenceFragment;
 import android.app.Fragment;
 import android.app.ListFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 		listViewFrag = ListViewFragment.newInstance();
 
 		FragmentTransaction fragTrans = getFragmentManager().beginTransaction();
-		fragTrans.replace(R.id.frameLayout, listViewFrag);
+		fragTrans.add(R.id.frameLayout, listViewFrag);
 		fragTrans.commit();
 	}
 
