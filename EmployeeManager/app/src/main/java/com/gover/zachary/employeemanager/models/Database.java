@@ -19,6 +19,7 @@ public class Database extends SQLiteOpenHelper {
 	 * MARK: Global Properties
 	 */
 
+	private ArrayList<Employee> employees;
 	private static Database instance = null;
 	private static final String DATABASE_FILE = "database.db";
 	private static final int DATABASE_VERSION = 1;
@@ -95,27 +96,31 @@ public class Database extends SQLiteOpenHelper {
 
 				// Create the new employee
 				Employee emp = new Employee();
-				emp.setFirstName(results.getString(0));
-				emp.setLastName(results.getString(1));
-				emp.setEmployeeNumber(results.getInt(2));
-				emp.setEmploymentStatus(results.getString(3));
-				emp.setHireDate(new Date(results.getLong(4)));
+				emp.setId(results.getInt(0));
+				emp.setFirstName(results.getString(1));
+				emp.setLastName(results.getString(2));
+				emp.setEmployeeNumber(results.getInt(3));
+				emp.setEmploymentStatus(results.getString(4));
+				emp.setHireDate(new Date(results.getLong(5)));
+
+				System.out.println(emp);
 
 				employees.add(emp);
 
 			} while(results.moveToNext());
 		}
 
+		// Set global employees for singular fetch
+		this.employees = employees;
+
 		return employees;
 	}
 
 	public Employee getEmployee(int position) {
 		// Fetch all employees and get the item at the position
-		ArrayList<Employee> employees = getEmployees();
+		if (position > this.employees.size() - 1) { return null; }
 
-		if (position > employees.size() - 1) { return null; }
-
-		return employees.get(position);
+		return this.employees.get(position);
 	}
 
 	/**

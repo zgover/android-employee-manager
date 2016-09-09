@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void openEmployeeDetail(Employee emp) {
-		
+
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 	public void submitForm(View view) {
 		// Get current values
 		String fName = ((EditText) findViewById(R.id.firstName)).getText().toString().trim();
-		String lName = ((EditText) findViewById(R.id.firstName)).getText().toString().trim();
+		String lName = ((EditText) findViewById(R.id.lastName)).getText().toString().trim();
 		String empNum = ((EditText) findViewById(R.id.employeeNumber)).getText()
 						   .toString().trim();
 		String empStat = ((EditText) findViewById(R.id.employmentStatus)).getText()
