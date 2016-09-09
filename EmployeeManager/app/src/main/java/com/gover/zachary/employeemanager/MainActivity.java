@@ -7,6 +7,8 @@ package com.gover.zachary.employeemanager;
 import android.app.FragmentTransaction;
 import android.app.Fragment;
 import android.app.ListFragment;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,7 +23,7 @@ import com.gover.zachary.employeemanager.models.Employee;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ListViewFragment.ClickListener, SettingsFragment.SettingsListener{
 
 	/**
 	 * MARK: Global Properties
@@ -73,8 +75,32 @@ public class MainActivity extends AppCompatActivity {
 		showFrag(EmployeeFormFragment.newInstance());
 	}
 
-	public void openEmployeeDetail(Employee emp) {
+	@Override
+	public void openEmployeeDetail(int position) {
+		// Get the selected employee
+		Employee emp = db.getEmployee(position);
+		System.out.println(emp);
 
+		showFrag(EmployeeDetailFragment.newInstance());
+	}
+
+	@Override
+	public void deleteAll() {
+		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+		alert.setTitle("Are you sure?");
+		alert.setMessage("Are you sure you would like to delete all employees?");
+		alert.setPositiveButton("Cancel", null);
+		alert.setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialogInterface, int i) {
+				db.deleteAllEmployees();
+				adapter.clear();
+				adapter.notifyDataSetChanged();
+				getFragmentManager().popBackStack();
+			}
+		});
+
+		alert.show();
 	}
 
 	/**
@@ -84,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
 	public void showFrag(Fragment frag) {
 		FragmentTransaction fragTrans = getFragmentManager().beginTransaction();
 
+		// Add the new fragment, hide the list and set the back stack so we may get
+		// back to the listview
 		fragTrans.add(R.id.frameLayout, frag);
 		fragTrans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 		fragTrans.hide(listViewFrag);
@@ -131,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
 		emp.setEmploymentStatus(empStat);
 		emp.setHireDate(hireDate);
 
+		// Add the employee to the db and pop back to the list view
 		db.addEmployee(emp);
 		adapter.clear();
 		adapter.addAll(db.getEmployees());

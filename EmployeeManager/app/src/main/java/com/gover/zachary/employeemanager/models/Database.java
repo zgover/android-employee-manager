@@ -103,8 +103,6 @@ public class Database extends SQLiteOpenHelper {
 				emp.setEmploymentStatus(results.getString(4));
 				emp.setHireDate(new Date(results.getLong(5)));
 
-				System.out.println(emp);
-
 				employees.add(emp);
 
 			} while(results.moveToNext());

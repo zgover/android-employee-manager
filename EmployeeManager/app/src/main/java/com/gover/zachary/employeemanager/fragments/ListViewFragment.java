@@ -4,6 +4,7 @@
 
 package com.gover.zachary.employeemanager.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.app.ListFragment;
 import android.view.LayoutInflater;
@@ -12,12 +13,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.gover.zachary.employeemanager.R;
+import com.gover.zachary.employeemanager.models.Employee;
 
 import java.util.ArrayList;
 
 public class ListViewFragment extends ListFragment {
 
 	public static final String TAG = "ListViewFragment.TAG";
+	private ClickListener listener;
+
+	public interface ClickListener {
+		void openEmployeeDetail(int position);
+	}
 
 	/**
 	 * MARK: Class Initializer
@@ -30,6 +37,10 @@ public class ListViewFragment extends ListFragment {
 		return fragment;
 	}
 
+	/**
+	 * MARK: Default Methods
+	 */
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// Inflate the view
@@ -37,9 +48,13 @@ public class ListViewFragment extends ListFragment {
 		return view;
 	}
 
-	/**
-	 * MARK: Default Methods
-	 */
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+
+		// Set listener to MainActivity
+		this.listener = (ClickListener) activity;
+	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -65,5 +80,7 @@ public class ListViewFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
+
+		listener.openEmployeeDetail(position);
 	}
 }

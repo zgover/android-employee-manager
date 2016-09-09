@@ -4,12 +4,23 @@
 
 package com.gover.zachary.employeemanager.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import com.gover.zachary.employeemanager.R;
 
 public class SettingsFragment extends PreferenceFragment {
+
+	public interface SettingsListener {
+		void deleteAll();
+	}
+
+	/**
+	 * MARK: Global Properties
+	 */
+
+	private SettingsListener listener;
 
 	/**
 	 * MARK: Class Initializer
@@ -35,6 +46,14 @@ public class SettingsFragment extends PreferenceFragment {
 	}
 
 	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+
+		// Set listener to MainActivity
+		this.listener = (SettingsListener) activity;
+	}
+
+	@Override
 	public void onActivityCreated(Bundle _savedInstanceState) {
 		super.onActivityCreated(_savedInstanceState);
 
@@ -44,6 +63,8 @@ public class SettingsFragment extends PreferenceFragment {
 		pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference _pref) {
+				listener.deleteAll();
+
 				return true;
 			}
 		});
