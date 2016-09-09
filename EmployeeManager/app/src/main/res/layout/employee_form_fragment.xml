@@ -53,11 +53,10 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:textAppearance="@style/FormFieldLabel"
-				android:text="Hire Date:"/>
+				android:text="Employment Status:"/>
 
 			<EditText
-				android:id="@+id/hireDate"
-				android:inputType="datetime"
+				android:id="@+id/employmentStatus"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"/>
 
@@ -65,12 +64,20 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:textAppearance="@style/FormFieldLabel"
-				android:text="Employment Status:"/>
+				android:text="Hire Date:"/>
 
-			<EditText
-				android:id="@+id/employmentStatus"
+			<DatePicker
+				android:id="@+id/hireDate"
+				android:layout_marginTop="10dp"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"/>
+
+			<Button
+				android:layout_marginTop="20dp"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="Submit"
+				android:onClick="submitForm"/>
 
 		</LinearLayout>
 

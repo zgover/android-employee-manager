@@ -31,7 +31,7 @@ public class EmployeeFormFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// Inflate the view
-		View view = inflater.inflate(R.layout.add_employee_fragment, container, false);
+		View view = inflater.inflate(R.layout.employee_form_fragment, container, false);
 		return view;
 	}
 

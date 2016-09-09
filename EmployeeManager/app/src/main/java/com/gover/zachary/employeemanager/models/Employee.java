@@ -26,6 +26,15 @@ public class Employee implements Serializable {
 	public Employee(){}
 
 	/**
+	 * MARK: Supers
+	 */
+
+	@Override
+	public String toString() {
+		return this.getName();
+	}
+
+	/**
 	 * MARK: Getter and Setters
 	 */
 
