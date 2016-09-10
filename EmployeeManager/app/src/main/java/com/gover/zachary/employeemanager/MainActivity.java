@@ -12,10 +12,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.*;
 import com.gover.zachary.employeemanager.fragments.*;
 import com.gover.zachary.employeemanager.models.Database;
 import com.gover.zachary.employeemanager.models.Employee;
@@ -31,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements ListViewFragment.
 
 	public Database db;
 	public ArrayAdapter adapter;
+	public static int currentEmp;
 
 	/**
 	 * MARK: Fragments
@@ -75,57 +73,12 @@ public class MainActivity extends AppCompatActivity implements ListViewFragment.
 		showFrag(EmployeeFormFragment.newInstance());
 	}
 
-	@Override
-	public void openEmployeeDetail(int position) {
-		// Get the selected employee
-		Employee emp = db.getEmployee(position);
-		System.out.println(emp);
-
-		showFrag(EmployeeDetailFragment.newInstance());
-	}
-
-	@Override
-	public void deleteAll() {
-		AlertDialog.Builder alert = new AlertDialog.Builder(this);
-		alert.setTitle("Are you sure?");
-		alert.setMessage("Are you sure you would like to delete all employees?");
-		alert.setPositiveButton("Cancel", null);
-		alert.setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialogInterface, int i) {
-				db.deleteAllEmployees();
-				adapter.clear();
-				adapter.notifyDataSetChanged();
-				getFragmentManager().popBackStack();
-			}
-		});
-
-		alert.show();
-	}
-
-	/**
-	 * MARK: Custom Methods
-	 */
-
-	public void showFrag(Fragment frag) {
-		FragmentTransaction fragTrans = getFragmentManager().beginTransaction();
-
-		// Add the new fragment, hide the list and set the back stack so we may get
-		// back to the listview
-		fragTrans.add(R.id.frameLayout, frag);
-		fragTrans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-		fragTrans.hide(listViewFrag);
-		fragTrans.addToBackStack(listViewFrag.getClass().getName());
-
-		fragTrans.commit();
-	}
-
 	public void submitForm(View view) {
 		// Get current values
 		String fName = ((EditText) findViewById(R.id.firstName)).getText().toString().trim();
 		String lName = ((EditText) findViewById(R.id.lastName)).getText().toString().trim();
 		String empNum = ((EditText) findViewById(R.id.employeeNumber)).getText()
-						   .toString().trim();
+							.toString().trim();
 		String empStat = ((EditText) findViewById(R.id.employmentStatus)).getText()
 							 .toString().trim();
 
@@ -167,5 +120,88 @@ public class MainActivity extends AppCompatActivity implements ListViewFragment.
 		adapter.notifyDataSetChanged();
 
 		getFragmentManager().popBackStack();
+	}
+
+	public void deleteEmployee(View view) {
+		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+		alert.setTitle("Are you sure?");
+		alert.setMessage("Are you sure you would like to delete this employee?");
+		alert.setPositiveButton("Cancel", null);
+		alert.setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialogInterface, int i) {
+				db.deleteEmployee(db.getEmployees().get(currentEmp).getId());
+
+				adapter.clear();
+				adapter.addAll(db.getEmployees());
+				adapter.notifyDataSetChanged();
+
+				getFragmentManager().popBackStack();
+			}
+		});
+
+		alert.show();
+	}
+
+	/**
+	 * MARK: Overrides
+	 */
+
+	@Override
+	public void openEmployeeDetail(int position) {
+		// Get the selected employee
+		Employee emp = db.getEmployee(position);
+
+		if (emp == null) { return; }
+
+		// Build the fragment
+		EmployeeDetailFragment empDetailFrag = EmployeeDetailFragment.newInstance();
+		Bundle args = new Bundle();
+
+		args.putString("fname", emp.getFirstName());
+		args.putString("lname", emp.getLastName());
+		args.putString("emp_num", Integer.toString(emp.getEmployeeNumber()));
+		args.putString("emp_stat", emp.getEmploymentStatus());
+		args.putString("hire_date", emp.getHireDateString(this));
+
+		empDetailFrag.setArguments(args);
+
+		showFrag(empDetailFrag);
+	}
+
+	@Override
+	public void deleteAll() {
+		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+		alert.setTitle("Are you sure?");
+		alert.setMessage("Are you sure you would like to delete all employees?");
+		alert.setPositiveButton("Cancel", null);
+		alert.setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialogInterface, int i) {
+				db.deleteAllEmployees();
+				adapter.clear();
+				adapter.notifyDataSetChanged();
+				getFragmentManager().popBackStack();
+			}
+		});
+
+		alert.show();
+	}
+
+	/**
+	 * MARK: Custom Methods
+	 */
+
+	public void showFrag(Fragment frag) {
+		FragmentTransaction fragTrans = getFragmentManager().beginTransaction();
+
+		// Add the new fragment, hide the list and set the back stack so we may get
+		// back to the listview
+		fragTrans.add(R.id.frameLayout, frag);
+		fragTrans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+		fragTrans.hide(listViewFrag);
+		fragTrans.addToBackStack(listViewFrag.getClass().getName());
+
+		fragTrans.commit();
 	}
 }

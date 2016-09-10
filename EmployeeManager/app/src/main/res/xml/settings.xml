@@ -21,7 +21,7 @@
 			android:summary="Select the default date format"
 			android:entries="@array/date_format_entries"
 			android:entryValues="@array/date_format_entry_values"
-			android:defaultValue="0"/>
+			android:defaultValue="yyyy-MM-dd"/>
 
 	</PreferenceCategory>
 

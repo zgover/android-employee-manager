@@ -2,14 +2,14 @@
 	<string name="app_name">EmployeeManager</string>
 
 	<string-array name="date_format_entries">
-		<item>YYYY-MM-DD</item>
-		<item>MM-DD-YYYY</item>
-		<item>MM-YY</item>
+		<item>yyyy-MM-dd</item>
+		<item>MM-dd-yyyy</item>
+		<item>MM-yy</item>
 	</string-array>
 
 	<string-array name="date_format_entry_values">
-		<item>0</item>
-		<item>1</item>
-		<item>2</item>
+		<item>yyyy-MM-dd</item>
+		<item>MM-dd-yyyy</item>
+		<item>MM-yy</item>
 	</string-array>
 </resources>

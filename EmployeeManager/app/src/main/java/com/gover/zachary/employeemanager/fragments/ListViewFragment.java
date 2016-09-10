@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import com.gover.zachary.employeemanager.MainActivity;
 import com.gover.zachary.employeemanager.R;
 import com.gover.zachary.employeemanager.models.Employee;
 
@@ -80,7 +81,7 @@ public class ListViewFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-
+		MainActivity.currentEmp = position;
 		listener.openEmployeeDetail(position);
 	}
 }

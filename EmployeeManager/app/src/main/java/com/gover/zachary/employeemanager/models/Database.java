@@ -26,7 +26,7 @@ public class Database extends SQLiteOpenHelper {
 	private static final String TABLE_NAME = "employee";
 	private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME + " ";
 	private static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME+
-							" (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+							" ( id INTEGER PRIMARY KEY AUTOINCREMENT, " +
 							"first_name TEXT, last_name TEXT, emp_num INT, " +
 							"emp_status TEXT, hire_date DATETIME)";
 
@@ -125,11 +125,11 @@ public class Database extends SQLiteOpenHelper {
 	 * MARK: Delete Methods
 	 */
 
-	public void deleteEmployee(int position) {
+	public void deleteEmployee(int id) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
-		String where = "id='?'";
-		String[] whereArgs = {Integer.toString(position)};
+		String where = "id=?";
+		String[] whereArgs = {Integer.toString(id)};
 
 		db.delete(TABLE_NAME, where, whereArgs);
 	}

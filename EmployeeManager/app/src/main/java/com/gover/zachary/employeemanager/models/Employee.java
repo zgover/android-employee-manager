@@ -4,10 +4,16 @@
 
 package com.gover.zachary.employeemanager.models;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Employee implements Serializable {
+public class Employee {
 
 	/**
 	 * MARK: Global Properties
@@ -77,6 +83,18 @@ public class Employee implements Serializable {
 
 	public Date getHireDate() {
 		return hireDate;
+	}
+
+	public String getHireDateString(Context context){
+		SharedPreferences defaultPrefs = PreferenceManager
+											 .getDefaultSharedPreferences(context);
+		String displayType = defaultPrefs.getString("DATE_FORMAT", "yyyy-MM-dd");
+
+		// Setup the custom date display
+		SimpleDateFormat dateFormat = new SimpleDateFormat(displayType);
+		String newDate = dateFormat.format(this.hireDate).toString();
+
+		return newDate;
 	}
 
 	public void setHireDate(Date hireDate) {
